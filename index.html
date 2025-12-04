@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EKO - Broadcast Storage Calculator</title>
+    <title>EKO - Calculateur Broadcast Storage</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap"
         rel="stylesheet">
@@ -106,8 +106,6 @@
         .subtitle {
             color: var(--text-secondary);
             font-size: 1.1rem;
-            max-width: 800px;
-            margin: 0 auto;
         }
 
         .calculator-card {
@@ -247,7 +245,176 @@
             color: var(--accent-orange);
         }
 
-        .eko-note {
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .tab {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px 8px 0 0;
+            padding: 12px 24px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab:hover {
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        .tab.active {
+            background: var(--bg-card);
+            color: var(--accent-orange);
+            border-bottom-color: var(--accent-orange);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .duration-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            background: var(--bg-card);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .duration-btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px 20px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .duration-btn:hover {
+            background: var(--bg-card);
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+
+        .duration-btn.active {
+            background: var(--accent-orange);
+            border-color: var(--accent-orange);
+            color: white;
+            box-shadow: 0 4px 12px rgba(255, 107, 0, 0.4);
+        }
+
+        .format-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .format-table caption {
+            caption-side: top;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+            text-align: left;
+            background: var(--bg-secondary);
+        }
+
+        .format-table th {
+            background: var(--bg-secondary);
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--accent-orange);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .format-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .format-table tbody tr {
+            transition: all 0.2s ease;
+        }
+
+        .format-table tbody tr:hover {
+            background: var(--bg-secondary);
+        }
+
+        .format-name {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .bitrate {
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        .file-size {
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .size-small {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--color-green);
+        }
+
+        .size-medium {
+            background: rgba(255, 215, 0, 0.2);
+            color: var(--color-yellow);
+        }
+
+        .size-large {
+            background: rgba(255, 140, 0, 0.2);
+            color: var(--color-orange);
+        }
+
+        .size-huge {
+            background: rgba(255, 68, 68, 0.2);
+            color: var(--color-red);
+        }
+
+        .glossary-section {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 16px;
@@ -255,34 +422,90 @@
             margin-bottom: 30px;
         }
 
-        .eko-note h3 {
+        .glossary-section h3 {
+            color: var(--accent-blue);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .glossary-item {
+            background: var(--bg-secondary);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-orange);
+        }
+
+        .glossary-term {
+            font-weight: 600;
+            color: var(--accent-orange);
+            margin-bottom: 5px;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .glossary-def {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .tech-annex {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .tech-annex h3 {
             color: var(--accent-green);
             margin-bottom: 20px;
             font-size: 1.3rem;
         }
 
-        .eko-note h4 {
+        .tech-annex h4 {
             color: var(--accent-blue);
-            margin-top: 20px;
+            margin-top: 25px;
             margin-bottom: 15px;
             font-size: 1.1rem;
         }
 
-        .eko-note p {
+        .tech-annex p {
             color: var(--text-secondary);
             margin-bottom: 15px;
             line-height: 1.7;
         }
 
-        .eko-note ul {
+        .tech-annex ul {
             margin-left: 20px;
             margin-bottom: 15px;
         }
 
-        .eko-note li {
+        .tech-annex li {
             color: var(--text-secondary);
             margin-bottom: 8px;
             line-height: 1.6;
+        }
+
+        .tech-annex code {
+            background: var(--bg-secondary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--accent-orange);
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .highlight-box {
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--accent-blue);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
         }
 
         @media (max-width: 768px) {
@@ -298,14 +521,26 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
+            .glossary-grid {
+                grid-template-columns: 1fr;
+            }
+
             h1 {
                 font-size: 1.5rem;
             }
 
-            .language-selector {
-                position: static;
-                justify-content: center;
-                margin-bottom: 20px;
+            .tabs {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+            }
+
+            .format-table {
+                font-size: 0.9rem;
+            }
+
+            .format-table th,
+            .format-table td {
+                padding: 10px;
             }
         }
 
@@ -315,6 +550,30 @@
             color: var(--text-secondary);
             border-top: 1px solid var(--border-color);
             margin-top: 60px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .badge-sd {
+            background: rgba(255, 107, 0, 0.2);
+            color: var(--accent-orange);
+        }
+
+        .badge-hd {
+            background: rgba(0, 168, 255, 0.2);
+            color: var(--accent-blue);
+        }
+
+        .badge-4k {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--accent-green);
         }
     </style>
 </head>
@@ -331,20 +590,19 @@
             <text x="200" y="140" font-family="Arial, sans-serif" font-size="120" font-weight="bold" fill="white"
                 text-anchor="middle">EKO</text>
         </svg>
-        <h1 data-translate="main_title">Calculateur Broadcast Storage</h1>
-        <p class="subtitle" data-translate="main_subtitle">Outil professionnel pour ingénieurs broadcast - THE FAKTORY
-        </p>
+        <h1 data-translate="main_title">EKO Calc</h1>
+        <p class="subtitle" data-translate="main_subtitle">Master Your Production Workflows</p>
     </header>
 
     <div class="container">
-        <!-- Video + Audio Calculator -->
         <div class="calculator-card">
-            <h2 data-translate="video_audio_calc">🎬 Calculateur Vidéo + Audio</h2>
+            <h2>🎬 Calculateur Interactif</h2>
 
             <div class="calculator-grid">
                 <div class="input-group">
-                    <label for="videoFormat" data-translate="video_format">Format Vidéo</label>
+                    <label for="videoFormat">Format Vidéo</label>
                     <select id="videoFormat">
+                        <option value="0">❌ Pas de Vidéo (Black)</option>
                         <optgroup label="SD 576i/480i (60i)">
                             <option value="2">H.264 Proxy (2 Mbps)</option>
                             <option value="8">H.265 Broadcast (8 Mbps)</option>
@@ -380,8 +638,9 @@
                 </div>
 
                 <div class="input-group">
-                    <label for="audioFormat" data-translate="audio_format">Format Audio</label>
+                    <label for="audioFormat">Format Audio</label>
                     <select id="audioFormat">
+                        <option value="0">🔇 Pas d'Audio (Silence)</option>
                         <optgroup label="PCM Non Compressé (48kHz)">
                             <option value="0.768">PCM 16-bit Mono (0.768 Mbps)</option>
                             <option value="1.536">PCM 16-bit Stéréo (1.536 Mbps)</option>
@@ -401,31 +660,31 @@
                 </div>
 
                 <div class="input-group">
-                    <label for="duration" data-translate="duration">Durée (minutes)</label>
+                    <label for="duration">Durée (minutes)</label>
                     <input type="number" id="duration" value="60" min="1" step="1">
                 </div>
             </div>
 
             <div class="results">
-                <h3 data-translate="results">📊 Résultats</h3>
+                <h3>📊 Résultats</h3>
                 <div class="result-grid">
                     <div class="result-item">
-                        <span class="result-label" data-translate="file_size">Taille Fichier</span>
+                        <span class="result-label">Taille Fichier</span>
                         <span class="result-value" id="fileSize">-</span>
                     </div>
                     <div class="result-item">
-                        <span class="result-label" data-translate="total_bitrate">Débit Total</span>
+                        <span class="result-label">Débit Total</span>
                         <span class="result-value" id="totalBitrate">-</span>
                     </div>
                     <div class="result-item">
-                        <span class="result-label" data-translate="bitrate_per_sec">Débit Mo/s</span>
+                        <span class="result-label">Débit Mo/s</span>
                         <span class="result-value" id="bitratePerSec">-</span>
                     </div>
                 </div>
 
                 <div class="storage-capacities">
-                    <h4 style="color: var(--text-secondary); margin-bottom: 15px;" data-translate="recording_duration">
-                        ⏱️ Durée d'enregistrement par capacité SSD</h4>
+                    <h4 style="color: var(--text-secondary); margin-bottom: 15px;">⏱️ Durée d'enregistrement par
+                        capacité SSD</h4>
                     <div class="storage-grid">
                         <div class="storage-item">
                             <div class="storage-capacity">512 Go</div>
@@ -452,201 +711,713 @@
             </div>
         </div>
 
-        <!-- Audio-Only Calculator -->
-        <div class="calculator-card">
-            <h2 data-translate="audio_only_calc">🎵 Calculateur Audio Seul</h2>
+        <div class="duration-selector">
+            <span style="color: var(--text-secondary); margin-right: 10px; align-self: center;">Durée de
+                référence:</span>
+            <button class="duration-btn" data-duration="1">1 min</button>
+            <button class="duration-btn" data-duration="30">30 min</button>
+            <button class="duration-btn active" data-duration="60">1h</button>
+            <button class="duration-btn" data-duration="120">2h</button>
+            <button class="duration-btn" data-duration="240">4h</button>
+            <button class="duration-btn" data-duration="600">10h</button>
+        </div>
 
-            <div class="calculator-grid">
-                <div class="input-group">
-                    <label for="audioSampleRate" data-translate="sample_rate">Fréquence d'échantillonnage</label>
-                    <select id="audioSampleRate">
-                        <option value="44.1">44.1 kHz (CD)</option>
-                        <option value="48" selected>48 kHz (Broadcast)</option>
-                        <option value="96">96 kHz (Hi-Res)</option>
-                    </select>
+        <div class="tabs">
+            <div class="tab active" data-tab="video">📹 Vidéo</div>
+            <div class="tab" data-tab="audio">🎵 Audio</div>
+            <div class="tab" data-tab="sdi">🔌 SDI + Audio</div>
+            <div class="tab" data-tab="monitoring">📡 Monitoring/SRT</div>
+            <div class="tab" data-tab="storage">💾 Stockage</div>
+            <div class="tab" data-tab="guide">📚 Guide Technique</div>
+            <div class="tab" data-tab="glossary">📖 Lexique</div>
+            <div class="tab" data-tab="technical">🔧 Annexe Technique</div>
+        </div>
+
+        <div id="video" class="tab-content active">
+            <table class="format-table">
+                <caption><span class="badge badge-sd">SD</span> 576i/480i (60i)</caption>
+                <thead>
+                    <tr>
+                        <th>Format</th>
+                        <th>Débit (Mbps)</th>
+                        <th>Taille (<span class="ref-duration">60</span> min)</th>
+                        <th>Mo/s</th>
+                    </tr>
+                </thead>
+                <tbody id="sdTable"></tbody>
+            </table>
+            <table class="format-table">
+                <caption><span class="badge badge-hd">HD</span> 1080i60</caption>
+                <thead>
+                    <tr>
+                        <th>Format</th>
+                        <th>Débit (Mbps)</th>
+                        <th>Taille (<span class="ref-duration">60</span> min)</th>
+                        <th>Mo/s</th>
+                    </tr>
+                </thead>
+                <tbody id="hd1080iTable"></tbody>
+            </table>
+            <table class="format-table">
+                <caption><span class="badge badge-hd">HD</span> 1080p60</caption>
+                <thead>
+                    <tr>
+                        <th>Format</th>
+                        <th>Débit (Mbps)</th>
+                        <th>Taille (<span class="ref-duration">60</span> min)</th>
+                        <th>Mo/s</th>
+                    </tr>
+                </thead>
+                <tbody id="hd1080pTable"></tbody>
+            </table>
+            <table class="format-table">
+                <caption><span class="badge badge-4k">4K</span> UHD</caption>
+                <thead>
+                    <tr>
+                        <th>Format</th>
+                        <th>Débit (Mbps)</th>
+                        <th>Taille (<span class="ref-duration">60</span> min)</th>
+                        <th>Mo/s</th>
+                    </tr>
+                </thead>
+                <tbody id="uhd4kTable"></tbody>
+            </table>
+        </div>
+
+        <div id="audio" class="tab-content">
+            <table class="format-table">
+                <caption>🎚️ PCM Non Compressé (48kHz)</caption>
+                <thead>
+                    <tr>
+                        <th>Format</th>
+                        <th>Débit (Mbps)</th>
+                        <th>Taille (<span class="ref-duration">60</span> min)</th>
+                        <th>Mo/s</th>
+                    </tr>
+                </thead>
+                <tbody id="pcmTable"></tbody>
+            </table>
+            <table class="format-table">
+                <caption>🎚️ Audio Compressé Broadcast</caption>
+                <thead>
+                    <tr>
+                        <th>Format</th>
+                        <th>Débit (Mbps)</th>
+                        <th>Taille (<span class="ref-duration">60</span> min)</th>
+                        <th>Mo/s</th>
+                    </tr>
+                </thead>
+                <tbody id="compressedTable"></tbody>
+            </table>
+        </div>
+
+        <div id="sdi" class="tab-content">
+            <table class="format-table">
+                <caption>🔌 Configurations SDI + Audio</caption>
+                <thead>
+                    <tr>
+                        <th>Configuration</th>
+                        <th>Vidéo (Mbps)</th>
+                        <th>Audio (Mbps)</th>
+                        <th>Total (Mbps)</th>
+                        <th>Taille (<span class="ref-duration">60</span> min)</th>
+                    </tr>
+                </thead>
+                <tbody id="sdiTable"></tbody>
+            </table>
+        </div>
+
+        <div id="monitoring" class="tab-content">
+            <table class="format-table">
+                <caption>📡 Monitoring / SRT (AWS MediaConnect)</caption>
+                <thead>
+                    <tr>
+                        <th>Profil</th>
+                        <th>Débit (Mbps)</th>
+                        <th>Taille (<span class="ref-duration">60</span> min)</th>
+                        <th>Mo/s</th>
+                    </tr>
+                </thead>
+                <tbody id="monitoringTable"></tbody>
+            </table>
+        </div>
+
+        <div id="storage" class="tab-content">
+            <table class="format-table">
+                <caption>💾 Durées d'enregistrement par capacité SSD</caption>
+                <thead>
+                    <tr>
+                        <th>Format</th>
+                        <th>Débit</th>
+                        <th>512 Go</th>
+                        <th>1 To</th>
+                        <th>2 To</th>
+                        <th>4 To</th>
+                        <th>8 To</th>
+                    </tr>
+                </thead>
+                <tbody id="storageTable"></tbody>
+            </table>
+        </div>
+
+        <div id="guide" class="tab-content">
+            <div class="tech-annex">
+                <h3>📚 Guide Technique Broadcast - Comprendre les Codecs et Formats</h3>
+
+                <h4>1. Codec vs Conteneur : La Différence Fondamentale</h4>
+                <div class="highlight-box">
+                    <p><strong>CODEC</strong> (COmpressor-DECompressor) = Algorithme de compression</p>
+                    <p><strong>CONTENEUR</strong> = Format de fichier qui encapsule vidéo + audio + métadonnées</p>
+                </div>
+                <ul>
+                    <li><strong>.mov (QuickTime)</strong> : Conteneur Apple, peut contenir ProRes, H.264, DNxHD, etc.
+                    </li>
+                    <li><strong>.mxf (Material eXchange Format)</strong> : Conteneur broadcast professionnel, standard
+                        SMPTE. Utilisé pour DNxHD, XDCAM, AVC-Intra</li>
+                    <li><strong>.mp4</strong> : Conteneur grand public, généralement H.264/H.265 + AAC</li>
+                    <li><strong>.avi</strong> : Ancien conteneur Microsoft, peut contenir divers codecs</li>
+                </ul>
+                <p><strong>Exemple :</strong> Un fichier <code>.mov</code> peut contenir du ProRes 422, du H.264, ou
+                    même du MJPEG. Le conteneur est juste l'emballage !</p>
+
+                <h4>2. Intra-frame vs Inter-frame : Compression I-only vs GOP</h4>
+
+                <div class="highlight-box">
+                    <p><strong>INTRA-FRAME (I-only)</strong> : Chaque image est compressée indépendamment</p>
+                    <ul>
+                        <li>✅ Montage frame-accurate, scrubbing fluide</li>
+                        <li>✅ Qualité constante, pas d'artefacts temporels</li>
+                        <li>✅ Idéal pour post-production et slow-motion</li>
+                        <li>❌ Fichiers plus volumineux</li>
+                    </ul>
+                    <p><strong>Formats I-only :</strong> ProRes, DNxHD, MJPEG, AVC-Intra, XDCAM HD422</p>
                 </div>
 
-                <div class="input-group">
-                    <label for="audioBitDepth" data-translate="bit_depth">Profondeur de bits</label>
-                    <select id="audioBitDepth">
-                        <option value="16">16-bit</option>
-                        <option value="24" selected>24-bit</option>
-                    </select>
+                <div class="highlight-box">
+                    <p><strong>INTER-FRAME (GOP - Group of Pictures)</strong> : Images dépendantes les unes des autres
+                    </p>
+                    <ul>
+                        <li>✅ Compression extrême, fichiers très légers</li>
+                        <li>✅ Parfait pour distribution et streaming</li>
+                        <li>❌ Montage lourd, nécessite transcoding</li>
+                        <li>❌ Artefacts possibles en mouvement rapide</li>
+                    </ul>
+                    <p><strong>Formats GOP :</strong> H.264, H.265/HEVC, MPEG-2, XAVC-L</p>
                 </div>
 
-                <div class="input-group">
-                    <label for="audioChannels" data-translate="channels">Configuration canaux</label>
-                    <select id="audioChannels">
-                        <option value="1">Mono (1ch)</option>
-                        <option value="2" selected>Stéréo (2ch)</option>
-                        <option value="6">5.1 Surround (6ch)</option>
-                        <option value="8">7.1 Surround (8ch)</option>
-                        <option value="16">Multi-track 16ch</option>
-                        <option value="32">Multi-track 32ch</option>
-                    </select>
+                <p><strong>Structure GOP :</strong></p>
+                <ul>
+                    <li><strong>I-frame</strong> : Image complète (référence)</li>
+                    <li><strong>P-frame</strong> : Prédiction depuis image précédente</li>
+                    <li><strong>B-frame</strong> : Prédiction bidirectionnelle (avant/arrière)</li>
+                </ul>
+                <p>Exemple GOP typique : <code>I-B-B-P-B-B-P-B-B-I</code> (GOP de 12 images)</p>
+
+                <h4>3. Familles de Codecs et Leurs Origines</h4>
+
+                <table class="format-table">
+                    <caption>🏭 Familles de Codecs Professionnels</caption>
+                    <thead>
+                        <tr>
+                            <th>Famille</th>
+                            <th>Origine</th>
+                            <th>Type</th>
+                            <th>Usage Principal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="format-name">ProRes (422, 422 HQ, 4444)</td>
+                            <td>Apple</td>
+                            <td>Intra-frame</td>
+                            <td>Post-production, montage, archivage</td>
+                        </tr>
+                        <tr>
+                            <td class="format-name">DNxHD / DNxHR</td>
+                            <td>Avid</td>
+                            <td>Intra-frame</td>
+                            <td>Workflows Avid Media Composer</td>
+                        </tr>
+                        <tr>
+                            <td class="format-name">MJPEG</td>
+                            <td>Standard JPEG</td>
+                            <td>Intra-frame</td>
+                            <td>Replay, slow-motion, faible latence</td>
+                        </tr>
+                        <tr>
+                            <td class="format-name">H.264 / AVC</td>
+                            <td>MPEG-LA</td>
+                            <td>Inter-frame (GOP)</td>
+                            <td>Distribution, diffusion TV, streaming</td>
+                        </tr>
+                        <tr>
+                            <td class="format-name">H.265 / HEVC</td>
+                            <td>MPEG-LA</td>
+                            <td>Inter-frame (GOP)</td>
+                            <td>4K/8K, streaming premium, archivage</td>
+                        </tr>
+                        <tr>
+                            <td class="format-name">XDCAM HD / HD422</td>
+                            <td>Sony</td>
+                            <td>Intra-frame (MPEG-2)</td>
+                            <td>Acquisition caméra, ENG</td>
+                        </tr>
+                        <tr>
+                            <td class="format-name">AVC-Intra</td>
+                            <td>Panasonic</td>
+                            <td>Intra-frame (H.264)</td>
+                            <td>Caméras broadcast Panasonic</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>4. Ratios de Compression : Les Chiffres Clés</h4>
+
+                <div class="highlight-box">
+                    <p><strong>Référence : SDI RAW 10-bit 1080i60 = 1485 Mbps</strong></p>
+                    <p>Tous les ratios sont calculés par rapport au flux SDI non compressé</p>
                 </div>
 
-                <div class="input-group">
-                    <label for="audioCodec" data-translate="audio_codec">Codec Audio</label>
-                    <select id="audioCodec">
-                        <option value="pcm" selected>PCM (Non compressé)</option>
-                        <option value="aac">AAC-LC (256 kbps/ch)</option>
-                        <option value="flac">FLAC (Lossless ~50%)</option>
-                    </select>
+                <table class="format-table">
+                    <caption>📊 Ratios de Compression Réels</caption>
+                    <thead>
+                        <tr>
+                            <th>Codec</th>
+                            <th>Débit 1080i60</th>
+                            <th>Ratio vs RAW</th>
+                            <th>Facteur</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="format-name">HD-SDI RAW 10-bit</td>
+                            <td class="bitrate">1485 Mbps</td>
+                            <td>1:1</td>
+                            <td>×1 (référence)</td>
+                        </tr>
+                        <tr>
+                            <td class="format-name">ProRes 422</td>
+                            <td class="bitrate">147 Mbps</td>
+                            <td>10:1</td>
+                            <td>×10</td>
+                        </tr>
+                        <tr>
+                            <td class="format-name">DNxHD 145</td>
+                            <td class="bitrate">145 Mbps</td>
+                            <td>10:1</td>
+                            <td>×10</td>
+                        </tr>
+                        <tr>
+                            <td class="format-name">MJPEG 100</td>
+                            <td class="bitrate">100 Mbps</td>
+                            <td>15:1</td>
+                            <td>×15</td>
+                        </tr>
+                        <tr>
+                            <td class="format-name">MJPEG 50</td>
+                            <td class="bitrate">50 Mbps</td>
+                            <td>30:1</td>
+                            <td>×30</td>
+                        </tr>
+                        <tr>
+                            <td class="format-name">H.264 Broadcast</td>
+                            <td class="bitrate">25 Mbps</td>
+                            <td>60:1</td>
+                            <td>×60</td>
+                        </tr>
+                        <tr>
+                            <td class="format-name">H.265 Broadcast</td>
+                            <td class="bitrate">15 Mbps</td>
+                            <td>100:1</td>
+                            <td>×100</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p><strong>Règle de trois simple :</strong></p>
+                <ul>
+                    <li><strong>MJPEG ≈ ×6</strong> plus compact que ProRes</li>
+                    <li><strong>H.264 ≈ ×30</strong> plus compact que MJPEG</li>
+                    <li><strong>H.265 ≈ ×2</strong> plus compact que H.264</li>
+                    <li><strong>Donc H.265 ≈ ×60</strong> plus compact que MJPEG !</li>
+                </ul>
+
+                <h4>5. Différences Majeures et Subtilités</h4>
+
+                <p><strong>ProRes vs DNxHD :</strong></p>
+                <ul>
+                    <li><strong>ProRes</strong> : Débit variable (VBR), meilleure qualité/taille. Natif macOS, support
+                        Windows limité</li>
+                    <li><strong>DNxHD</strong> : Débit constant (CBR), prédictibilité parfaite. Multiplateforme,
+                        standard Avid</li>
+                    <li><strong>Équivalences :</strong> ProRes 422 ≈ DNxHD 145 | ProRes 422 HQ ≈ DNxHD 220</li>
+                </ul>
+
+                <p><strong>MJPEG : Le Codec de Replay</strong></p>
+                <ul>
+                    <li><strong>Latence ultra-faible</strong> : Décodage instantané, parfait pour slow-motion live</li>
+                    <li><strong>Frame-accurate</strong> : Chaque image indépendante, scrubbing parfait</li>
+                    <li><strong>Robustesse</strong> : Pas de propagation d'erreurs (vs GOP)</li>
+                    <li><strong>Limitation :</strong> Compression spatiale uniquement, fichiers plus gros que H.264</li>
+                </ul>
+
+                <p><strong>H.264 vs H.265 :</strong></p>
+                <ul>
+                    <li><strong>H.264 (AVC)</strong> : Standard universel, décodage matériel partout, GOP typique 12-30
+                        images</li>
+                    <li><strong>H.265 (HEVC)</strong> : 50% de gain vs H.264, essentiel pour 4K/8K, décodage plus lourd
+                    </li>
+                    <li><strong>Profils broadcast :</strong> High 10-bit pour H.264, Main 10 pour H.265</li>
+                </ul>
+
+                <h4>6. Streams Solides et Rapides : I-only Expliqué</h4>
+
+                <div class="highlight-box">
+                    <p><strong>Pourquoi "I-only" est plus robuste :</strong></p>
+                    <ul>
+                        <li><strong>Pas de dépendances temporelles</strong> : Une erreur n'affecte qu'une seule image
+                        </li>
+                        <li><strong>Décodage parallélisable</strong> : Chaque image décodée indépendamment → plus rapide
+                        </li>
+                        <li><strong>Scrubbing instantané</strong> : Pas besoin de décoder tout le GOP</li>
+                        <li><strong>Montage précis</strong> : Cut frame-exact sans re-encodage</li>
+                    </ul>
                 </div>
 
-                <div class="input-group">
-                    <label for="audioDuration" data-translate="duration">Durée (minutes)</label>
-                    <input type="number" id="audioDuration" value="60" min="1" step="1">
+                <p><strong>Comparaison décodage :</strong></p>
+                <ul>
+                    <li><strong>ProRes/DNxHD/MJPEG (I-only)</strong> : 1 image = 1 décodage → ultra-rapide</li>
+                    <li><strong>H.264 GOP=12</strong> : Pour afficher 1 image, peut nécessiter décoder jusqu'à 12 images
+                    </li>
+                    <li><strong>H.265 GOP=30</strong> : Encore plus lourd, mais compression maximale</li>
+                </ul>
+
+                <h4>7. Quand Utiliser Quel Codec ?</h4>
+
+                <table class="format-table">
+                    <caption>🎯 Guide de Sélection par Usage</caption>
+                    <thead>
+                        <tr>
+                            <th>Usage</th>
+                            <th>Codec Recommandé</th>
+                            <th>Raison</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="format-name">Replay Sport / Slow-Motion</td>
+                            <td>MJPEG 100-200</td>
+                            <td>Latence minimale, I-only, robuste</td>
+                        </tr>
+                        <tr>
+                            <td class="format-name">Montage / Post-Production</td>
+                            <td>ProRes 422 HQ / DNxHD 220</td>
+                            <td>Qualité maximale, montage fluide</td>
+                        </tr>
+                        <tr>
+                            <td class="format-name">Archivage Master</td>
+                            <td>ProRes 4444 / DNxHR HQX</td>
+                            <td>Qualité visually lossless, alpha channel</td>
+                        </tr>
+                        <tr>
+                            <td class="format-name">Distribution TV HD</td>
+                            <td>H.264 25-50 Mbps</td>
+                            <td>Standard universel, bon compromis</td>
+                        </tr>
+                        <tr>
+                            <td class="format-name">Streaming 4K</td>
+                            <td>H.265 60-100 Mbps</td>
+                            <td>Compression optimale pour UHD</td>
+                        </tr>
+                        <tr>
+                            <td class="format-name">Acquisition Caméra</td>
+                            <td>ProRes / XAVC / AVC-Intra</td>
+                            <td>Qualité source, robustesse terrain</td>
+                        </tr>
+                        <tr>
+                            <td class="format-name">Monitoring / Confidence</td>
+                            <td>H.265 3-15 Mbps</td>
+                            <td>Bande passante minimale, qualité suffisante</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>8. Points Clés à Retenir</h4>
+
+                <div class="highlight-box">
+                    <p><strong>Les 10 Commandements du Codec Broadcast :</strong></p>
+                    <ol>
+                        <li><strong>Codec ≠ Conteneur</strong> : .mov peut contenir n'importe quel codec</li>
+                        <li><strong>I-only pour le montage</strong> : ProRes, DNxHD, MJPEG</li>
+                        <li><strong>GOP pour la distribution</strong> : H.264, H.265</li>
+                        <li><strong>MJPEG = Replay king</strong> : Latence minimale, robustesse maximale</li>
+                        <li><strong>ProRes = Apple</strong>, <strong>DNxHD = Avid</strong> : Équivalents fonctionnels
+                        </li>
+                        <li><strong>H.265 = 2× H.264</strong> en compression</li>
+                        <li><strong>10-bit minimum</strong> pour broadcast professionnel</li>
+                        <li><strong>PCM 24-bit 48kHz</strong> = Standard audio broadcast</li>
+                        <li><strong>MXF pour l'interopérabilité</strong> broadcast</li>
+                        <li><strong>Toujours garder le master</strong> en qualité maximale (ProRes HQ minimum)</li>
+                    </ol>
                 </div>
             </div>
+        </div>
 
-            <div class="results">
-                <h3 data-translate="results">📊 Résultats</h3>
-                <div class="result-grid">
-                    <div class="result-item">
-                        <span class="result-label" data-translate="file_size">Taille Fichier</span>
-                        <span class="result-value" id="audioFileSize">-</span>
+        <div id="glossary" class="tab-content">
+            <div class="glossary-section">
+                <h3>📖 Lexique Broadcast</h3>
+                <div class="glossary-grid">
+                    <div class="glossary-item">
+                        <div class="glossary-term">Mbps (Megabits per second)</div>
+                        <div class="glossary-def">Unité de mesure du débit binaire. 1 Mbps = 1 million de bits par
+                            seconde. À ne pas confondre avec Mo/s (Mégaoctets par seconde) où 1 Mo/s = 8 Mbps.</div>
                     </div>
-                    <div class="result-item">
-                        <span class="result-label" data-translate="total_bitrate">Débit Total</span>
-                        <span class="result-value" id="audioBitrate">-</span>
+                    <div class="glossary-item">
+                        <div class="glossary-term">SDI (Serial Digital Interface)</div>
+                        <div class="glossary-def">Standard de transmission vidéo numérique non compressé utilisé en
+                            broadcast professionnel. Variantes : SD-SDI (270 Mbps), HD-SDI (1.485 Gbps), 3G-SDI (2.97
+                            Gbps), 12G-SDI (11.88 Gbps).</div>
                     </div>
-                    <div class="result-item">
-                        <span class="result-label" data-translate="bitrate_per_sec">Débit Mo/s</span>
-                        <span class="result-value" id="audioMBps">-</span>
+                    <div class="glossary-item">
+                        <div class="glossary-term">PCM (Pulse Code Modulation)</div>
+                        <div class="glossary-def">Format audio numérique non compressé. Standard broadcast : 48 kHz, 16
+                            ou 24 bits. Qualité maximale mais fichiers volumineux.</div>
+                    </div>
+                    <div class="glossary-item">
+                        <div class="glossary-term">ProRes 422</div>
+                        <div class="glossary-def">Codec vidéo professionnel Apple avec compression intra-frame.
+                            Excellent compromis qualité/taille pour le montage et l'archivage broadcast.</div>
+                    </div>
+                    <div class="glossary-item">
+                        <div class="glossary-term">DNxHD</div>
+                        <div class="glossary-def">Codec vidéo professionnel Avid similaire à ProRes. Utilisé
+                            principalement dans les workflows Avid Media Composer.</div>
+                    </div>
+                    <div class="glossary-item">
+                        <div class="glossary-term">H.264 / H.265 (HEVC)</div>
+                        <div class="glossary-def">Codecs de compression vidéo. H.265 offre 50% de réduction de taille vs
+                            H.264 à qualité égale. Standards pour distribution et monitoring.</div>
+                    </div>
+                    <div class="glossary-item">
+                        <div class="glossary-term">MJPEG (Motion JPEG)</div>
+                        <div class="glossary-def">Compression vidéo intra-frame (chaque image compressée
+                            indépendamment). Faible latence, idéal pour replay et slow-motion.</div>
+                    </div>
+                    <div class="glossary-item">
+                        <div class="glossary-term">1080i vs 1080p</div>
+                        <div class="glossary-def">1080i = entrelacé (60 demi-images/s), 1080p = progressif (60 images
+                            complètes/s). Le 1080p nécessite 2× le débit du 1080i pour la même qualité.</div>
+                    </div>
+                    <div class="glossary-item">
+                        <div class="glossary-term">SRT (Secure Reliable Transport)</div>
+                        <div class="glossary-def">Protocole de streaming vidéo sur IP avec correction d'erreurs. Utilisé
+                            pour contribution broadcast sur Internet public.</div>
+                    </div>
+                    <div class="glossary-item">
+                        <div class="glossary-term">Dolby E</div>
+                        <div class="glossary-def">Format audio compressé pour distribution broadcast. Peut transporter
+                            jusqu'à 8 canaux dans un flux stéréo SDI.</div>
+                    </div>
+                    <div class="glossary-item">
+                        <div class="glossary-term">AES/EBU</div>
+                        <div class="glossary-def">Standard de transmission audio numérique professionnel. Supporte PCM
+                            24-bit 48 kHz sur câbles XLR ou coaxiaux.</div>
+                    </div>
+                    <div class="glossary-item">
+                        <div class="glossary-term">Confidence Feed</div>
+                        <div class="glossary-def">Flux vidéo de retour permettant de vérifier la qualité du signal
+                            principal. Généralement en qualité réduite (H.265 3-15 Mbps).</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- EKO Technical Note -->
-        <div class="eko-note">
-            <h3 data-translate="eko_title">📡 À Propos du Système EKO</h3>
-            <p data-translate="eko_intro">
-                <strong>EKO</strong> est un système d'enhancement audio intelligent conçu pour les replays au ralenti en
-                broadcast sportif.
-            </p>
+        <div id="technical" class="tab-content">
+            <div class="tech-annex">
+                <h3>🔧 Annexe Technique - Guide des Formats Broadcast</h3>
 
-            <h4 data-translate="eko_architecture">Architecture du Système</h4>
-            <ul>
-                <li data-translate="eko_purpose"><strong>Objectif :</strong> Amélioration audio en temps réel pour
-                    séquences slow-motion</li>
-                <li data-translate="eko_integration"><strong>Intégration :</strong> Compatible avec systèmes de replay
-                    existants (EVS, K2, etc.)</li>
-                <li data-translate="eko_technology"><strong>Technologie :</strong> Traitement audio basé sur l'IA pour
-                    maintenir la qualité sonore</li>
-                <li data-translate="eko_workflow"><strong>Workflow :</strong> Entrée SDI → Enhancement audio → Sortie
-                    SDI</li>
-                <li data-translate="eko_usecase"><strong>Cas d'usage :</strong> Diffusion sportive, événements en
-                    direct, production broadcast</li>
-            </ul>
+                <h4>1. Formats Vidéo SD (Standard Definition)</h4>
+                <p><strong>Résolutions :</strong> 720×576 (PAL) ou 720×480 (NTSC)</p>
+                <ul>
+                    <li><strong>H.264 Proxy (2 Mbps) :</strong> Compression maximale pour preview et monitoring léger.
+                        Non recommandé pour production.</li>
+                    <li><strong>H.265 Broadcast (8 Mbps) :</strong> Qualité broadcast acceptable pour distribution SD
+                        moderne.</li>
+                    <li><strong>DV/DVCAM (25 Mbps) :</strong> Format historique des caméras DV. Compression 5:1, qualité
+                        acceptable pour archivage.</li>
+                    <li><strong>MJPEG Broadcast (30 Mbps) :</strong> Intra-frame, faible latence. Idéal pour replay
+                        instantané.</li>
+                    <li><strong>SD-SDI RAW 10-bit (270 Mbps) :</strong> Signal non compressé. Qualité maximale, utilisé
+                        pour transmission studio.</li>
+                </ul>
 
-            <h4 data-translate="eko_specs">Spécifications Techniques</h4>
-            <ul>
-                <li data-translate="eko_input"><strong>Entrée :</strong> SDI avec audio embarqué (jusqu'à 16 canaux)
-                </li>
-                <li data-translate="eko_processing"><strong>Traitement :</strong> Enhancement audio temps réel avec
-                    latence minimale</li>
-                <li data-translate="eko_output"><strong>Sortie :</strong> Flux SDI amélioré avec audio optimisé</li>
-                <li data-translate="eko_latency"><strong>Latence :</strong>
-                    < 1 frame pour diffusion en direct</li>
-                <li data-translate="eko_formats"><strong>Formats supportés :</strong> Tous standards broadcast
-                    (SD/HD/4K)</li>
-            </ul>
+                <h4>2. Formats Vidéo HD 1080i60 (Entrelacé)</h4>
+                <p><strong>Résolution :</strong> 1920×1080, 60 champs/seconde</p>
+                <ul>
+                    <li><strong>H.265 Broadcast (15 Mbps) :</strong> Compression moderne, qualité broadcast pour
+                        distribution.</li>
+                    <li><strong>H.264 Broadcast (25 Mbps) :</strong> Standard actuel pour diffusion TV HD.</li>
+                    <li><strong>MJPEG 50/100 (50-100 Mbps) :</strong> Replay et slow-motion. MJPEG 100 = qualité
+                        visuelle excellente.</li>
+                    <li><strong>ProRes 422 (147 Mbps) :</strong> Standard post-production Apple. Qualité broadcast,
+                        montage fluide.</li>
+                    <li><strong>DNxHD 145 (145 Mbps) :</strong> Équivalent Avid du ProRes 422.</li>
+                    <li><strong>HD-SDI RAW 10-bit (1485 Mbps) :</strong> Non compressé. Transmission studio, mastering.
+                    </li>
+                </ul>
 
-            <h4 data-translate="eko_benefits">Avantages</h4>
-            <ul>
-                <li data-translate="eko_benefit1">✅ Maintien de la qualité audio pendant les ralentis</li>
-                <li data-translate="eko_benefit2">✅ Enhancement automatique sans intervention manuelle</li>
-                <li data-translate="eko_benefit3">✅ Intégration transparente dans workflows existants</li>
-                <li data-translate="eko_benefit4">✅ Qualité broadcast professionnelle garantie</li>
-            </ul>
+                <h4>3. Formats Vidéo HD 1080p60 (Progressif)</h4>
+                <p><strong>Résolution :</strong> 1920×1080, 60 images complètes/seconde</p>
+                <ul>
+                    <li><strong>H.265 Broadcast (30 Mbps) :</strong> Distribution moderne, streaming premium.</li>
+                    <li><strong>H.264 Broadcast (50 Mbps) :</strong> Qualité broadcast standard pour 1080p.</li>
+                    <li><strong>MJPEG 100/200 (100-200 Mbps) :</strong> Slow-motion haute qualité. MJPEG 200 = qualité
+                        quasi-lossless.</li>
+                    <li><strong>ProRes 422 (294 Mbps) :</strong> Post-production 1080p, qualité broadcast.</li>
+                    <li><strong>ProRes 422 HQ (441 Mbps) :</strong> Haute qualité pour mastering et effets visuels.</li>
+                    <li><strong>3G-SDI RAW (2970 Mbps) :</strong> Non compressé 10-bit. Transmission studio 1080p.</li>
+                </ul>
+
+                <h4>4. Formats Vidéo 4K UHD</h4>
+                <p><strong>Résolution :</strong> 3840×2160</p>
+                <ul>
+                    <li><strong>H.265 Broadcast (60 Mbps) :</strong> Distribution 4K moderne, streaming UHD.</li>
+                    <li><strong>MJPEG Broadcast (300 Mbps) :</strong> Replay 4K, slow-motion UHD.</li>
+                    <li><strong>ProRes 422 HQ (707 Mbps) :</strong> Post-production 4K professionnelle.</li>
+                    <li><strong>12G-SDI RAW (5940 Mbps) :</strong> Non compressé 10-bit. Transmission studio 4K.</li>
+                </ul>
+
+                <h4>5. Formats Audio PCM (Non Compressé)</h4>
+                <p><strong>Standard broadcast :</strong> 48 kHz, 16 ou 24 bits</p>
+                <div class="highlight-box">
+                    <p><strong>Calcul débit PCM :</strong> Fréquence × Profondeur × Canaux</p>
+                    <p>Exemple : 48000 Hz × 24 bits × 2 canaux = 2.304 Mbps (stéréo 24-bit)</p>
+                </div>
+                <ul>
+                    <li><strong>PCM 16-bit :</strong> Qualité CD. Acceptable pour diffusion, fichiers plus légers.</li>
+                    <li><strong>PCM 24-bit :</strong> Standard broadcast professionnel. Dynamique étendue,
+                        post-production.</li>
+                    <li><strong>Multicanal (5.1, 16ch, 32ch) :</strong> Production live, sport, concerts. 16ch =
+                        standard OB Van, 32ch = productions complexes.</li>
+                </ul>
+
+                <h4>6. Formats Audio Compressés</h4>
+                <ul>
+                    <li><strong>AAC-LC (128-384 kbps) :</strong> Compression moderne pour distribution. 256 kbps stéréo
+                        = qualité transparente.</li>
+                    <li><strong>Dolby AC-3 (448 kbps) :</strong> Standard DVD/Blu-ray. 5.1 canaux, compatible grand
+                        public.</li>
+                    <li><strong>Dolby E (1.92 Mbps) :</strong> Distribution broadcast. Jusqu'à 8 canaux dans flux stéréo
+                        SDI. Synchronisé image.</li>
+                </ul>
+
+                <h4>7. Configurations SDI + Audio</h4>
+                <p>Configurations typiques pour enregistreurs et serveurs broadcast :</p>
+                <ul>
+                    <li><strong>1080i + MJPEG50 + 16ch PCM :</strong> Replay standard, sport. Bon compromis
+                        qualité/stockage.</li>
+                    <li><strong>1080i + MJPEG100 + 16ch PCM :</strong> Replay haute qualité, slow-motion détaillé.</li>
+                    <li><strong>1080p60 + MJPEG100 + 32ch PCM :</strong> Production live complexe, concerts, sport
+                        premium.</li>
+                    <li><strong>1080p60 + ProRes422 + 32ch PCM :</strong> Post-production broadcast, archivage master.
+                    </li>
+                </ul>
+
+                <h4>8. Profils Monitoring et SRT</h4>
+                <p><strong>Monitoring :</strong> Flux de contrôle qualité, faible latence</p>
+                <ul>
+                    <li><strong>SD/720p H.264 (1-2.5 Mbps) :</strong> Monitoring basique, multi-écrans.</li>
+                    <li><strong>1080p30/60 H.264 (5-8 Mbps) :</strong> Monitoring HD standard.</li>
+                    <li><strong>Confidence H.265 (3.5-15 Mbps) :</strong> Retour qualité pour validation technique.</li>
+                </ul>
+                <p><strong>SRT (Contribution sur IP) :</strong></p>
+                <ul>
+                    <li><strong>Contribution 1080p (28-42 Mbps) :</strong> Liaison point-à-point, qualité broadcast.
+                    </li>
+                    <li><strong>Mezzanine (100 Mbps) :</strong> Haute qualité pour post-production distante.</li>
+                    <li><strong>AWS MediaConnect Max (120 Mbps) :</strong> Limite plateforme cloud AWS.</li>
+                </ul>
+
+                <h4>9. Recommandations par Usage</h4>
+                <div class="highlight-box">
+                    <p><strong>Replay Sport / Slow-Motion :</strong></p>
+                    <ul>
+                        <li>1080p60 MJPEG 100-200 + 16-32ch PCM</li>
+                        <li>Latence minimale, qualité image excellente</li>
+                    </ul>
+                </div>
+                <div class="highlight-box">
+                    <p><strong>Post-Production Broadcast :</strong></p>
+                    <ul>
+                        <li>1080p ProRes 422 HQ ou DNxHD + PCM 24-bit</li>
+                        <li>4K ProRes 422 HQ pour productions premium</li>
+                    </ul>
+                </div>
+                <div class="highlight-box">
+                    <p><strong>Archivage Master :</strong></p>
+                    <ul>
+                        <li>ProRes 422 HQ ou mieux</li>
+                        <li>PCM 24-bit multicanal</li>
+                        <li>Métadonnées complètes</li>
+                    </ul>
+                </div>
+                <div class="highlight-box">
+                    <p><strong>Distribution / Diffusion :</strong></p>
+                    <ul>
+                        <li>H.265 15-60 Mbps selon résolution</li>
+                        <li>AAC 256 kbps stéréo ou Dolby AC-3 5.1</li>
+                    </ul>
+                </div>
+
+                <h4>10. Formules de Calcul</h4>
+                <div class="highlight-box">
+                    <p><strong>Taille fichier (Go) =</strong> Débit (Mbps) × Durée (secondes) ÷ 8 ÷ 1000</p>
+                    <p><strong>Durée max (minutes) =</strong> Capacité (Go) × 8 × 1000 ÷ Débit (Mbps) ÷ 60</p>
+                    <p><strong>Débit Mo/s =</strong> Débit Mbps ÷ 8</p>
+                </div>
+            </div>
         </div>
     </div>
 
     <footer>
-        <p data-translate="footer">© 2024 THE FAKTORY - EKO Broadcast Storage Calculator</p>
+        <p>EKO - Système d'enhancement audio pour replays slow-motion broadcast</p>
+        <p style="margin-top: 10px; font-size: 0.9rem;">THE FAKTORY © 2025 - AI Ventures</p>
     </footer>
 
     <script>
+        const videoFormats = { sd: [{ name: 'H.264 Proxy', bitrate: 2 }, { name: 'H.265 Broadcast', bitrate: 8 }, { name: 'DV/DVCAM', bitrate: 25 }, { name: 'MJPEG Broadcast', bitrate: 30 }, { name: 'SD-SDI RAW 10-bit', bitrate: 270 }], hd1080i: [{ name: 'H.265 Broadcast', bitrate: 15 }, { name: 'H.264 Broadcast', bitrate: 25 }, { name: 'MJPEG 50', bitrate: 50 }, { name: 'MJPEG 100', bitrate: 100 }, { name: 'ProRes 422', bitrate: 147 }, { name: 'DNxHD 145', bitrate: 145 }, { name: 'HD-SDI RAW 10-bit', bitrate: 1485 }], hd1080p: [{ name: 'H.265 Broadcast', bitrate: 30 }, { name: 'H.264 Broadcast', bitrate: 50 }, { name: 'MJPEG 100', bitrate: 100 }, { name: 'MJPEG 200', bitrate: 200 }, { name: 'ProRes 422', bitrate: 294 }, { name: 'ProRes 422 HQ', bitrate: 441 }, { name: '3G-SDI RAW', bitrate: 2970 }], uhd4k: [{ name: 'H.265 Broadcast', bitrate: 60 }, { name: 'MJPEG Broadcast', bitrate: 300 }, { name: 'ProRes 422 HQ', bitrate: 707 }, { name: '12G-SDI RAW', bitrate: 5940 }] };
+        const audioFormats = { pcm: [{ name: 'PCM 16-bit Mono', bitrate: 0.768 }, { name: 'PCM 16-bit Stéréo', bitrate: 1.536 }, { name: 'PCM 24-bit Stéréo', bitrate: 2.304 }, { name: 'PCM 24-bit 5.1', bitrate: 6.912 }, { name: 'PCM 24-bit 16ch', bitrate: 18.432 }, { name: 'PCM 24-bit 32ch', bitrate: 36.864 }], compressed: [{ name: 'AAC-LC 128k Stéréo', bitrate: 0.128 }, { name: 'AAC-LC 256k Stéréo', bitrate: 0.256 }, { name: 'AAC 384k 5.1', bitrate: 0.384 }, { name: 'Dolby AC-3 5.1', bitrate: 0.448 }, { name: 'Dolby E 8ch', bitrate: 1.92 }] };
+        const sdiConfigs = [{ name: '1080i + MJPEG50 + 16ch', video: 50, audio: 18.432 }, { name: '1080i + MJPEG100 + 16ch', video: 100, audio: 18.432 }, { name: '1080p60 + MJPEG100 + 32ch', video: 100, audio: 36.864 }, { name: '1080p60 + ProRes422 + 32ch', video: 294, audio: 36.864 }];
+        const monitoringProfiles = [{ name: 'Monitoring SD H.264', bitrate: 1 }, { name: 'Monitoring 720p H.264', bitrate: 2.5 }, { name: 'Monitoring 1080p30 H.264', bitrate: 5 }, { name: 'Monitoring 1080p60 H.264', bitrate: 8 }, { name: 'Confidence 1080p H.265', bitrate: 3.5 }, { name: 'Confidence 4K H.265', bitrate: 15 }, { name: 'SRT Contribution 1080p30', bitrate: 28 }, { name: 'SRT Contribution 1080p60', bitrate: 42 }, { name: 'SRT Mezzanine', bitrate: 100 }, { name: 'AWS MediaConnect Max', bitrate: 120 }];
+        const storageCapacities = [512, 1000, 2000, 4000, 8000];
+        function calculateFileSize(b, d) { return b * d * 60 / 8 / 1000 }
+        function calculateDuration(c, b) { return c * 8 * 1000 / b / 60 }
+        function formatFileSize(s) { if (s < 1) return (s * 1000).toFixed(1) + ' Mo'; else if (s < 1000) return s.toFixed(2) + ' Go'; else return (s / 1000).toFixed(2) + ' To' }
+        function formatDuration(m) { if (m < 60) return Math.floor(m) + ' min'; else if (m < 1440) { const h = Math.floor(m / 60); const mins = Math.floor(m % 60); return h + 'h' + (mins > 0 ? mins.toString().padStart(2, '0') : ''); } else { const d = Math.floor(m / 1440); const h = Math.floor((m % 1440) / 60); return d + 'j' + (h > 0 ? ' ' + h + 'h' : ''); } }
+        function getSizeClass(s) { if (s < 10) return 'size-small'; if (s < 100) return 'size-medium'; if (s < 500) return 'size-large'; return 'size-huge' }
+        function updateCalculator() { const vb = parseFloat(document.getElementById('videoFormat').value); const ab = parseFloat(document.getElementById('audioFormat').value); const dur = parseFloat(document.getElementById('duration').value); const tb = vb + ab; const fs = calculateFileSize(tb, dur); const bps = tb / 8; document.getElementById('fileSize').textContent = formatFileSize(fs); document.getElementById('totalBitrate').textContent = tb.toFixed(2) + ' Mbps'; document.getElementById('bitratePerSec').textContent = bps.toFixed(2) + ' Mo/s'; document.getElementById('ssd512').textContent = formatDuration(calculateDuration(512, tb)); document.getElementById('ssd1tb').textContent = formatDuration(calculateDuration(1000, tb)); document.getElementById('ssd2tb').textContent = formatDuration(calculateDuration(2000, tb)); document.getElementById('ssd4tb').textContent = formatDuration(calculateDuration(4000, tb)); document.getElementById('ssd8tb').textContent = formatDuration(calculateDuration(8000, tb)); }
+        function populateVideoTable(tid, fmts, dur) { const tb = document.getElementById(tid); tb.innerHTML = ''; fmts.forEach(f => { const sz = calculateFileSize(f.bitrate, dur); const row = `<tr><td class="format-name">${f.name}</td><td class="bitrate">${f.bitrate}</td><td class="file-size ${getSizeClass(sz)}">${formatFileSize(sz)}</td><td>${(f.bitrate / 8).toFixed(2)}</td></tr>`; tb.innerHTML += row; }); }
+        function populateSDITable(dur) { const tb = document.getElementById('sdiTable'); tb.innerHTML = ''; sdiConfigs.forEach(c => { const tot = c.video + c.audio; const sz = calculateFileSize(tot, dur); const row = `<tr><td class="format-name">${c.name}</td><td class="bitrate">${c.video}</td><td class="bitrate">${c.audio.toFixed(3)}</td><td class="bitrate">${tot.toFixed(3)}</td><td class="file-size ${getSizeClass(sz)}">${formatFileSize(sz)}</td></tr>`; tb.innerHTML += row; }); }
+        function populateStorageTable() { const tb = document.getElementById('storageTable'); tb.innerHTML = ''; const all = [...videoFormats.hd1080i.map(f => ({ ...f, cat: 'HD 1080i' })), ...videoFormats.hd1080p.map(f => ({ ...f, cat: 'HD 1080p' })), ...videoFormats.uhd4k.map(f => ({ ...f, cat: '4K UHD' }))].filter(f => f.bitrate >= 15 && f.bitrate <= 500); all.forEach(f => { const durs = storageCapacities.map(c => formatDuration(calculateDuration(c, f.bitrate))); const row = `<tr><td class="format-name">${f.name}</td><td class="bitrate">${f.bitrate} Mbps</td><td>${durs[0]}</td><td>${durs[1]}</td><td>${durs[2]}</td><td>${durs[3]}</td><td>${durs[4]}</td></tr>`; tb.innerHTML += row; }); }
+        function updateAllTables(dur) { document.querySelectorAll('.ref-duration').forEach(el => { el.textContent = dur; }); populateVideoTable('sdTable', videoFormats.sd, dur); populateVideoTable('hd1080iTable', videoFormats.hd1080i, dur); populateVideoTable('hd1080pTable', videoFormats.hd1080p, dur); populateVideoTable('uhd4kTable', videoFormats.uhd4k, dur); populateVideoTable('pcmTable', audioFormats.pcm, dur); populateVideoTable('compressedTable', audioFormats.compressed, dur); populateVideoTable('monitoringTable', monitoringProfiles, dur); populateSDITable(dur); populateStorageTable(); }
+        document.getElementById('videoFormat').addEventListener('change', updateCalculator);
+        document.getElementById('audioFormat').addEventListener('change', updateCalculator);
+        document.getElementById('duration').addEventListener('input', updateCalculator);
+        document.querySelectorAll('.tab').forEach(tab => { tab.addEventListener('click', () => { document.querySelectorAll('.tab').forEach(t => t.classList.remove('active')); document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active')); tab.classList.add('active'); document.getElementById(tab.dataset.tab).classList.add('active'); }); });
+        let currentReferenceDuration = 60;
+        document.querySelectorAll('.duration-btn').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.duration-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); currentReferenceDuration = parseInt(btn.dataset.duration); updateAllTables(currentReferenceDuration); }); });
+        updateCalculator();
+        updateAllTables(60);
+
         // Translation system
         const translations = {
             fr: {
-                main_title: "Calculateur Broadcast Storage",
-                main_subtitle: "Outil professionnel pour ingénieurs broadcast - THE FAKTORY",
-                video_audio_calc: "🎬 Calculateur Vidéo + Audio",
-                audio_only_calc: "🎵 Calculateur Audio Seul",
-                video_format: "Format Vidéo",
-                audio_format: "Format Audio",
-                duration: "Durée (minutes)",
-                sample_rate: "Fréquence d'échantillonnage",
-                bit_depth: "Profondeur de bits",
-                channels: "Configuration canaux",
-                audio_codec: "Codec Audio",
-                results: "📊 Résultats",
-                file_size: "Taille Fichier",
-                total_bitrate: "Débit Total",
-                bitrate_per_sec: "Débit Mo/s",
-                recording_duration: "⏱️ Durée d'enregistrement par capacité SSD",
-                footer: "© 2024 THE FAKTORY - EKO Broadcast Storage Calculator",
-                eko_title: "📡 À Propos du Système EKO",
-                eko_intro: "EKO est un système d'enhancement audio intelligent conçu pour les replays au ralenti en broadcast sportif.",
-                eko_architecture: "Architecture du Système",
-                eko_purpose: "Objectif : Amélioration audio en temps réel pour séquences slow-motion",
-                eko_integration: "Intégration : Compatible avec systèmes de replay existants (EVS, K2, etc.)",
-                eko_technology: "Technologie : Traitement audio basé sur l'IA pour maintenir la qualité sonore",
-                eko_workflow: "Workflow : Entrée SDI → Enhancement audio → Sortie SDI",
-                eko_usecase: "Cas d'usage : Diffusion sportive, événements en direct, production broadcast",
-                eko_specs: "Spécifications Techniques",
-                eko_input: "Entrée : SDI avec audio embarqué (jusqu'à 16 canaux)",
-                eko_processing: "Traitement : Enhancement audio temps réel avec latence minimale",
-                eko_output: "Sortie : Flux SDI amélioré avec audio optimisé",
-                eko_latency: "Latence : < 1 frame pour diffusion en direct",
-                eko_formats: "Formats supportés : Tous standards broadcast (SD/HD/4K)",
-                eko_benefits: "Avantages",
-                eko_benefit1: "✅ Maintien de la qualité audio pendant les ralentis",
-                eko_benefit2: "✅ Enhancement automatique sans intervention manuelle",
-                eko_benefit3: "✅ Intégration transparente dans workflows existants",
-                eko_benefit4: "✅ Qualité broadcast professionnelle garantie"
+                main_title: "EKO Calc",
+                main_subtitle: "Master Your Production Workflows"
             },
             en: {
-                main_title: "Master Your Production Workflows",
-                main_subtitle: "Technical platform for broadcast engineers. Calculate storage needs, compare video/audio formats, and optimize your live production workflows.",
-                video_audio_calc: "🎬 Video + Audio Calculator",
-                audio_only_calc: "🎵 Audio-Only Calculator",
-                video_format: "Video Format",
-                audio_format: "Audio Format",
-                duration: "Duration (minutes)",
-                sample_rate: "Sample Rate",
-                bit_depth: "Bit Depth",
-                channels: "Channel Configuration",
-                audio_codec: "Audio Codec",
-                results: "📊 Results",
-                file_size: "File Size",
-                total_bitrate: "Total Bitrate",
-                bitrate_per_sec: "MB/s Rate",
-                recording_duration: "⏱️ Recording Duration per SSD Capacity",
-                footer: "© 2024 THE FAKTORY - EKO Broadcast Storage Calculator",
-                eko_title: "📡 About EKO System",
-                eko_intro: "EKO is an intelligent audio enhancement system designed for slow-motion replays in sports broadcasting.",
-                eko_architecture: "System Architecture",
-                eko_purpose: "Purpose: Real-time audio enhancement for slow-motion sequences",
-                eko_integration: "Integration: Compatible with existing replay systems (EVS, K2, etc.)",
-                eko_technology: "Technology: AI-powered audio processing to maintain sound quality",
-                eko_workflow: "Workflow: SDI Input → Audio Enhancement → SDI Output",
-                eko_usecase: "Use Case: Sports broadcasting, live events, broadcast production",
-                eko_specs: "Technical Specifications",
-                eko_input: "Input: SDI with embedded audio (up to 16 channels)",
-                eko_processing: "Processing: Real-time audio enhancement with minimal latency",
-                eko_output: "Output: Enhanced SDI stream with optimized audio",
-                eko_latency: "Latency: < 1 frame for live broadcast",
-                eko_formats: "Supported Formats: All broadcast standards (SD/HD/4K)",
-                eko_benefits: "Benefits",
-                eko_benefit1: "✅ Maintains audio quality during slow-motion",
-                eko_benefit2: "✅ Automatic enhancement without manual intervention",
-                eko_benefit3: "✅ Seamless integration into existing workflows",
-                eko_benefit4: "✅ Professional broadcast quality guaranteed"
+                main_title: "EKO Calc",
+                main_subtitle: "Master Your Production Workflows - Technical platform for broadcast engineers. Calculate storage needs, compare video/audio formats, and optimize your live production workflows."
             }
         };
 
@@ -671,88 +1442,6 @@
             });
             document.documentElement.lang = currentLang;
         }
-
-        // Video + Audio Calculator
-        function calculateVideoAudio() {
-            const videoBitrate = parseFloat(document.getElementById('videoFormat').value);
-            const audioBitrate = parseFloat(document.getElementById('audioFormat').value);
-            const duration = parseFloat(document.getElementById('duration').value);
-
-            const totalBitrate = videoBitrate + audioBitrate;
-            const fileSizeMB = (totalBitrate * duration * 60) / 8 / 1000;
-            const mbps = totalBitrate / 8;
-
-            document.getElementById('totalBitrate').textContent = totalBitrate.toFixed(2) + ' Mbps';
-            document.getElementById('bitratePerSec').textContent = mbps.toFixed(2) + ' Mo/s';
-
-            if (fileSizeMB < 1000) {
-                document.getElementById('fileSize').textContent = fileSizeMB.toFixed(2) + ' Mo';
-            } else if (fileSizeMB < 1000000) {
-                document.getElementById('fileSize').textContent = (fileSizeMB / 1000).toFixed(2) + ' Go';
-            } else {
-                document.getElementById('fileSize').textContent = (fileSizeMB / 1000000).toFixed(2) + ' To';
-            }
-
-            // Calculate SSD durations
-            const capacities = [512, 1000, 2000, 4000, 8000]; // GB
-            const ids = ['ssd512', 'ssd1tb', 'ssd2tb', 'ssd4tb', 'ssd8tb'];
-
-            capacities.forEach((capacity, index) => {
-                const durationMin = (capacity * 8 * 1000) / totalBitrate / 60;
-                const hours = Math.floor(durationMin / 60);
-                const mins = Math.floor(durationMin % 60);
-                document.getElementById(ids[index]).textContent = `${hours}h${mins.toString().padStart(2, '0')}`;
-            });
-        }
-
-        // Audio-Only Calculator
-        function calculateAudioOnly() {
-            const sampleRate = parseFloat(document.getElementById('audioSampleRate').value); // kHz
-            const bitDepth = parseFloat(document.getElementById('audioBitDepth').value);
-            const channels = parseFloat(document.getElementById('audioChannels').value);
-            const codec = document.getElementById('audioCodec').value;
-            const duration = parseFloat(document.getElementById('audioDuration').value);
-
-            let bitrateMbps;
-
-            if (codec === 'pcm') {
-                // PCM: Sample Rate (Hz) × Bit Depth × Channels / 1,000,000
-                bitrateMbps = (sampleRate * 1000 * bitDepth * channels) / 1000000;
-            } else if (codec === 'aac') {
-                // AAC: ~256 kbps per channel
-                bitrateMbps = (0.256 * channels);
-            } else if (codec === 'flac') {
-                // FLAC: ~50% of PCM
-                bitrateMbps = (sampleRate * 1000 * bitDepth * channels) / 1000000 * 0.5;
-            }
-
-            const fileSizeMB = (bitrateMbps * duration * 60) / 8 / 1000;
-            const mbps = bitrateMbps / 8;
-
-            document.getElementById('audioBitrate').textContent = bitrateMbps.toFixed(3) + ' Mbps';
-            document.getElementById('audioMBps').textContent = mbps.toFixed(3) + ' Mo/s';
-
-            if (fileSizeMB < 1000) {
-                document.getElementById('audioFileSize').textContent = fileSizeMB.toFixed(2) + ' Mo';
-            } else {
-                document.getElementById('audioFileSize').textContent = (fileSizeMB / 1000).toFixed(2) + ' Go';
-            }
-        }
-
-        // Event listeners
-        document.getElementById('videoFormat').addEventListener('change', calculateVideoAudio);
-        document.getElementById('audioFormat').addEventListener('change', calculateVideoAudio);
-        document.getElementById('duration').addEventListener('input', calculateVideoAudio);
-
-        document.getElementById('audioSampleRate').addEventListener('change', calculateAudioOnly);
-        document.getElementById('audioBitDepth').addEventListener('change', calculateAudioOnly);
-        document.getElementById('audioChannels').addEventListener('change', calculateAudioOnly);
-        document.getElementById('audioCodec').addEventListener('change', calculateAudioOnly);
-        document.getElementById('audioDuration').addEventListener('input', calculateAudioOnly);
-
-        // Initial calculations
-        calculateVideoAudio();
-        calculateAudioOnly();
     </script>
 </body>
 
